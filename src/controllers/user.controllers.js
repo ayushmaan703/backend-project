@@ -3,6 +3,7 @@ import APIerror from "../utils/APIerrors.js"
 import { User } from "../models/user.models.js"
 import { uploadToCloudinary } from "../utils/cloudinary.js"
 import APIresponse from "../utils/APIresponse.js"
+import jwt from "jsonwebtoken"
 const generateRefreshAndAccessTokens = async (userId) => {
     try {
         const user = await User.findById(userId)
@@ -119,7 +120,7 @@ const loginUser = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .cookie("accessToken", accessToken, options)
-        .cookie("refreshTokens", refreshToken, options)
+        .cookie("refreshToken", refreshToken, options)
         .json(
             new APIresponse(
                 200,
@@ -158,7 +159,6 @@ const logoutUser = asyncHandler(async (req, res) => {
 const getRefreshToken = asyncHandler(async (req, res) => {
     const gettingRefreshToken =
         req.cookies.refreshToken || req.body.refreshToken
-
     if (!gettingRefreshToken) {
         throw new APIerror(401, "Unauthorised request")
     }
@@ -167,7 +167,7 @@ const getRefreshToken = asyncHandler(async (req, res) => {
             gettingRefreshToken,
             process.env.REFRESH_TOKEN_SECRET
         )
-        const user = User.findById(decodedToken?._id)
+        const user = await User.findById(decodedToken?._id)
         if (!user) {
             throw new APIerror(401, "Cannot find user (Invalid refresh token)")
         }
@@ -201,7 +201,7 @@ const getRefreshToken = asyncHandler(async (req, res) => {
 })
 const changePassword = asyncHandler(async (req, res) => {
     const { password, newPassword } = req.body
-    const user = await User.findById(req.user._id)
+    const user = await User.findById(req.user._conditions._id)
     const checkingOldPassword = await user.isPasswordCorrect(password)
     if (!checkingOldPassword) {
         throw new APIerror(400, "Current password is incorrect")
@@ -215,7 +215,13 @@ const changePassword = asyncHandler(async (req, res) => {
 const getCurrentUser = asyncHandler(async (req, res) => {
     return res
         .status(200)
-        .json(new APIresponse(200, req.user, "User fetched Successfully "))
+        .json(
+            new APIresponse(
+                200,
+                { userId: req.user._conditions._id },
+                "User fetched Successfully "
+            )
+        )
 })
 const updateAccountDetails = asyncHandler(async (req, res) => {
     const { fullName, email } = req.body
@@ -226,7 +232,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
         throw new APIerror(400, "New email required")
     }
     const user = User.findByIdAndUpdate(
-        req.user._id,
+        req.user._conditions._id,
         {
             $set: {
                 fullName,
@@ -235,10 +241,15 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
         },
         { new: true }
     ).select("-password")
+    console.log(user)
     return res
         .status(200)
         .json(
-            new APIresponse(200, user, "Account details updated successfully")
+            new APIresponse(
+                200,
+                { },
+                "Account details updated successfully"
+            )
         )
 })
 const changeAvatar = asyncHandler(async (req, res) => {
