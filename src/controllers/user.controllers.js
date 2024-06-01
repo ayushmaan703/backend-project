@@ -106,7 +106,7 @@ const loginUser = asyncHandler(async (req, res) => {
     if (!isPasswordCorrect) {
         throw new APIerror(401, "Password Incorrect")
     }
-    const { refreshToken, accessToken } = generateRefreshAndAccessTokens(
+    const { refreshToken, accessToken } = await generateRefreshAndAccessTokens(
         getUser._id
     )
     const userLoginStatus = await User.findById(getUser._id).select(
@@ -134,7 +134,7 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 const logoutUser = asyncHandler(async (req, res) => {
     await User.findByIdAndUpdate(
-        req.user._id,
+        req.user?._id,
         {
             $unset: {
                 refreshToken: 1,
