@@ -40,6 +40,6 @@ router
 router
     .route("/update-coverImage")
     .post(verifyJWT, upload.single("coverImage"), changeCoverImage)
-router.route("/username").get(verifyJWT, getUserChannelInfo)
-router.route("/history").post(verifyJWT, getWatchHistory)
+router.route("/c/:username").get(verifyJWT, getUserChannelInfo)
+router.route("/history").get(verifyJWT, getWatchHistory)
 export default router

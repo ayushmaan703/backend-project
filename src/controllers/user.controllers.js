@@ -83,7 +83,7 @@ const registerUser = asyncHandler(async (req, res) => {
         )
     }
     return res
-        .status(201)
+        .status(200)
         .json(new APIresponse(200, isUserCreated, "User created successfully"))
 })
 const loginUser = asyncHandler(async (req, res) => {
@@ -93,7 +93,6 @@ const loginUser = asyncHandler(async (req, res) => {
     //password check -
     //access and referesh token
     //send cookie
-
     const { userName, email, password } = req.body
     if (!userName || !email) {
         throw new APIerror(400, "UserName or Email is required")
@@ -202,7 +201,7 @@ const getRefreshToken = asyncHandler(async (req, res) => {
 })
 const changePassword = asyncHandler(async (req, res) => {
     const { password, newPassword } = req.body
-    const user = await User.findById(req.user._conditions._id)
+    const user = await User.findById(req.user?._id)
     const checkingOldPassword = await user.isPasswordCorrect(password)
     if (!checkingOldPassword) {
         throw new APIerror(400, "Current password is incorrect")
@@ -219,7 +218,7 @@ const getCurrentUser = asyncHandler(async (req, res) => {
         .json(
             new APIresponse(
                 200,
-                { userId: req.user._conditions._id },
+                req.user._conditions._id,
                 "User fetched Successfully "
             )
         )
@@ -301,16 +300,16 @@ const changeCoverImage = asyncHandler(async (req, res) => {
         )
 })
 const getUserChannelInfo = asyncHandler(async (req, res) => {
-    console.log(req.body);
-    const {userName} = req.body
-    if (!userName) {
+    const { username } = req.params
+
+    if (!username?.trim()) {
         throw new APIerror(400, "Username is missing")
     }
 
     const channel = await User.aggregate([
         {
             $match: {
-                userName: userName,
+                userName: username,
             },
         },
         {
@@ -331,7 +330,7 @@ const getUserChannelInfo = asyncHandler(async (req, res) => {
         },
         {
             $addFields: {
-                subsciberCount: {
+                subscriberCount: {
                     $size: "$subscribers",
                 },
                 channelSubscribedToCount: {
@@ -340,13 +339,10 @@ const getUserChannelInfo = asyncHandler(async (req, res) => {
                 isSubscribed: {
                     $cond: {
                         if: {
-                            $in: [
-                                req.user._conditions._id,
-                                "$subscribers.subsciber",
-                            ],
-                            then: true,
-                            else: false,
+                            $in: [req.user?._id, "$subscribers.subsciber"],
                         },
+                        then: true,
+                        else: false,
                     },
                 },
             },
@@ -354,9 +350,9 @@ const getUserChannelInfo = asyncHandler(async (req, res) => {
         {
             $project: {
                 fullName: 1,
-                username: 1,
-                subscribersCount: 1,
-                channelsSubscribedToCount: 1,
+                userName: 1,
+                subscriberCount: 1,
+                channelSubscribedToCount: 1,
                 isSubscribed: 1,
                 avatar: 1,
                 coverImage: 1,
@@ -374,10 +370,12 @@ const getUserChannelInfo = asyncHandler(async (req, res) => {
         )
 })
 const getWatchHistory = asyncHandler(async (req, res) => {
+    const userId= req.user._conditions._id
+    console.log(userId);
     const user = await User.aggregate([
         {
             $match: {
-                _id: new mongoose.Types.ObjectId(req.user._conditions._id),
+                _id: new mongoose.Types.ObjectId(`${userId}`),
             },
         },
         {
@@ -417,13 +415,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
     ])
     return res
         .status(200)
-        .json(
-            new APIresponse(
-                200,
-                user[0].watchHistory,
-                "Watch history fetched successfully"
-            )
-        )
+        .json(new APIresponse(200, user[0].watchHistory, "Watch history fetched successfully"))
 })
 export {
     registerUser,
