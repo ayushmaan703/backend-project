@@ -1,8 +1,8 @@
 import { asyncHandler } from "../utils/asyncHandler.js"
 import APIerror from "../utils/APIerrors.js"
+import APIresponse from "../utils/APIresponse.js"
 import { User } from "../models/user.models.js"
 import { uploadToCloudinary } from "../utils/cloudinary.js"
-import APIresponse from "../utils/APIresponse.js"
 import jwt from "jsonwebtoken"
 import mongoose from "mongoose"
 const generateRefreshAndAccessTokens = async (userId) => {
@@ -135,7 +135,7 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 const logoutUser = asyncHandler(async (req, res) => {
     await User.findByIdAndUpdate(
-        req.user?._id,
+        req.user._conditions._id,
         {
             $unset: {
                 refreshToken: 1,
@@ -201,7 +201,7 @@ const getRefreshToken = asyncHandler(async (req, res) => {
 })
 const changePassword = asyncHandler(async (req, res) => {
     const { password, newPassword } = req.body
-    const user = await User.findById(req.user?._id)
+    const user = await User.findById(req.user._conditions._id)
     const checkingOldPassword = await user.isPasswordCorrect(password)
     if (!checkingOldPassword) {
         throw new APIerror(400, "Current password is incorrect")
@@ -232,7 +232,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
         throw new APIerror(400, "New email required")
     }
     const user = User.findByIdAndUpdate(
-        req.user?._id,
+        req.user._conditions._id,
         {
             $set: {
                 fullName: fullName,
@@ -261,7 +261,7 @@ const changeAvatar = asyncHandler(async (req, res) => {
         throw new APIerror(400, "Avatar is required")
     }
     const user = await User.findByIdAndUpdate(
-        req.user?._id,
+        req.user._conditions._id,
         {
             $set: {
                 avatar: avatar.url,
@@ -284,7 +284,7 @@ const changeCoverImage = asyncHandler(async (req, res) => {
         throw new APIerror(400, "CoverImage is required")
     }
     const user = await User.findByIdAndUpdate(
-        req.user?._id,
+        req.user._conditions._id,
         {
             $set: {
                 coverImage: CoverImage.url,
@@ -339,7 +339,7 @@ const getUserChannelInfo = asyncHandler(async (req, res) => {
                 isSubscribed: {
                     $cond: {
                         if: {
-                            $in: [req.user?._id, "$subscribers.subsciber"],
+                            $in: [req.user._conditions._id, "$subscribers.subsciber"],
                         },
                         then: true,
                         else: false,
