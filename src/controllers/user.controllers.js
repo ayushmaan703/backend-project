@@ -213,15 +213,12 @@ const changePassword = asyncHandler(async (req, res) => {
         .json(new APIresponse(200, {}, "Password updated successfully"))
 })
 const getCurrentUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._conditions._id).select(
+        "-password -refreshToken"
+    )
     return res
         .status(200)
-        .json(
-            new APIresponse(
-                200,
-                req.user._conditions._id,
-                "User fetched Successfully "
-            )
-        )
+        .json(new APIresponse(200, user, "User fetched Successfully "))
 })
 const updateAccountDetails = asyncHandler(async (req, res) => {
     const { fullName, email } = req.body
@@ -339,7 +336,10 @@ const getUserChannelInfo = asyncHandler(async (req, res) => {
                 isSubscribed: {
                     $cond: {
                         if: {
-                            $in: [req.user._conditions._id, "$subscribers.subsciber"],
+                            $in: [
+                                req.user._conditions._id,
+                                "$subscribers.subsciber",
+                            ],
                         },
                         then: true,
                         else: false,
@@ -370,8 +370,8 @@ const getUserChannelInfo = asyncHandler(async (req, res) => {
         )
 })
 const getWatchHistory = asyncHandler(async (req, res) => {
-    const userId= req.user._conditions._id
-    console.log(userId);
+    const userId = req.user._conditions._id
+    console.log(userId)
     const user = await User.aggregate([
         {
             $match: {
@@ -415,7 +415,13 @@ const getWatchHistory = asyncHandler(async (req, res) => {
     ])
     return res
         .status(200)
-        .json(new APIresponse(200, user[0].watchHistory, "Watch history fetched successfully"))
+        .json(
+            new APIresponse(
+                200,
+                user[0].watchHistory,
+                "Watch history fetched successfully"
+            )
+        )
 })
 export {
     registerUser,

@@ -4,9 +4,12 @@ import { User } from "../models/user.models.js"
 import APIerror from "../utils/APIerrors.js"
 import APIresponse from "../utils/APIresponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
-import { uploadToCloudinary } from "../utils/cloudinary.js"
-import { application } from "express"
+import {
+    uploadToCloudinary,
+    deleteFromCloudinary,
+} from "../utils/cloudinary.js"
 import { Comments } from "../models/comments.model.js"
+import { Likes } from "../models/likes.model.js"
 const publishAVideo = asyncHandler(async (req, res) => {
     const { title, discription } = req.body
     if (!title) {
@@ -26,8 +29,11 @@ const publishAVideo = asyncHandler(async (req, res) => {
         throw new APIerror(500, "Error uploading")
     }
     const video = await Video.create({
-        videoFile: videoUpload.url,
-        thumbnail: thumbnailUpload.url,
+        videoFile: { url: videoUpload.url, public_id: videoUpload.public_id },
+        thumbnail: {
+            url: thumbnailUpload.url,
+            public_id: thumbnailUpload.public_id,
+        },
         title,
         discription,
         isPublished: false,
@@ -100,12 +106,12 @@ const getAllVideos = asyncHandler(async (req, res) => {
             $unwind: "$ownerDetails",
         }
     )
- const videoAggregate =  Video.aggregate(addingPipelines)
+    const videoAggregate = Video.aggregate(addingPipelines)
     const options = {
         page: parseInt(page, 10),
         limit: parseInt(limit, 10),
     }
-    const video =  await Video.aggregatePaginate(videoAggregate, options)
+    const video = await Video.aggregatePaginate(videoAggregate, options)
     return res
         .status(200)
         .json(new APIresponse(200, video, "All videos fetched sucessfully"))
@@ -140,7 +146,7 @@ const getVideoById = asyncHandler(async (req, res) => {
                 localField: "owner",
                 foreignField: "_id",
                 as: "ownerDetails",
-                addingPipelines: [
+                pipeline: [
                     {
                         $lookup: {
                             from: "subsciptions",
@@ -232,19 +238,130 @@ const getVideoById = asyncHandler(async (req, res) => {
             new APIresponse(200, video[0], "video details fetched successfully")
         )
 })
-
 const updateVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
-    //TODO: update video details like title, description, thumbnail
+    const { title, discription } = req.body
+    const video = await Video.findById(videoId)
+    const oldThumbnailId = video.thumbnail.public_id
+    if (!(title && discription)) {
+        throw new APIerror(400, "New title and discription required")
+    }
+    if (!isValidObjectId(videoId)) {
+        throw new APIerror(400, "Video not found")
+    }
+    var updatedVideo = await Video.findByIdAndUpdate(
+        videoId,
+        {
+            $set: {
+                title: title,
+                discription: discription,
+            },
+        },
+        {
+            new: true,
+        }
+    )
+    const newThumbnailLocalPath = req.file?.path
+    if (newThumbnailLocalPath) {
+        await deleteFromCloudinary(oldThumbnailId)
+        const newThumbnail = await uploadToCloudinary(newThumbnailLocalPath)
+        updatedVideo = await Video.findByIdAndUpdate(
+            videoId,
+            {
+                $set: {
+                    thumbnail: {
+                        url: newThumbnail.url,
+                        public_id: newThumbnail.public_id,
+                    },
+                },
+            },
+            {
+                new: true,
+            }
+        )
+    }
+    if (!updatedVideo) {
+        throw new APIerror(500, "Failed to upload")
+    }
+    return res
+        .status(200)
+        .json(new APIresponse(200, updatedVideo, "Updation successfully"))
 })
 
 const deleteVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
-    //TODO: delete video
+    if (!isValidObjectId(videoId)) {
+        throw new APIerror(200, "Invalid video id")
+    }
+    const video = await Video.findById(videoId)
+    if (!video) {
+        throw new APIerror(200, "Video not found")
+    }
+    if (video?.owner.toString() !== req.user._conditions._id.toString()) {
+        throw new APIerror(
+            400,
+            "You can't delete the video as you ae not the owner "
+        )
+    }
+    const deletedVideo = await Video.findByIdAndDelete(videoId)
+    console.log(deletedVideo)
+    if (!deletedVideo) {
+        throw new APIerror(400, "Failed to delete the video ")
+    }
+    await deleteFromCloudinary(video.videoFile.public_id, "video")
+    await deleteFromCloudinary(video.thumbnail.public_id)
+    await Likes.deleteMany({
+        likedVideos: videoId,
+    })
+
+    await Comments.deleteMany({
+        videos: videoId,
+    })
+
+    return res
+        .status(200)
+        .json(new APIresponse(200, {}, "Video deleted successfully"))
 })
 
 const togglePublishStatus = asyncHandler(async (req, res) => {
     const { videoId } = req.params
+    if (!isValidObjectId(videoId)) {
+        throw new APIerror(200, "Invalid video id")
+    }
+    const video = await Video.findById(videoId)
+    if (!video) {
+        throw new APIerror(200, "Video not found")
+    }
+    if (video?.owner.toString() !== req.user._conditions._id.toString()) {
+        throw new APIerror(
+            400,
+            "You can't delete the video as you ae not the owner "
+        )
+    }
+    const videoPublishStatus = await Video.findByIdAndUpdate(
+        videoId,
+        {
+            $set: {
+                isPublished: !video?.isPublished,
+            },
+        },
+        {
+            new: true,
+        }
+    )
+    if (!videoPublishStatus) {
+        throw new APIerror(500, "Failed to toogle video publish status")
+    }
+
+    return res
+        .status(200)
+        .json(
+            new APIresponse(
+                200,
+                { isPublished: videoPublishStatus.isPublished },
+                "Video publish toggled successfully"
+            )
+        )
 })
 
 export {
