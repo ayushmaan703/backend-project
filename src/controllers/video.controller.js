@@ -211,7 +211,7 @@ const getVideoById = asyncHandler(async (req, res) => {
                 views: 1,
                 createdAt: 1,
                 duration: 1,
-                comments: 1,
+                comment: 1,
                 owner: 1,
                 likesCount: 1,
                 isLiked: 1,
@@ -291,11 +291,11 @@ const updateVideo = asyncHandler(async (req, res) => {
 const deleteVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
     if (!isValidObjectId(videoId)) {
-        throw new APIerror(200, "Invalid video id")
+        throw new APIerror(400, "Invalid video id")
     }
     const video = await Video.findById(videoId)
     if (!video) {
-        throw new APIerror(200, "Video not found")
+        throw new APIerror(400, "Video not found")
     }
     if (video?.owner.toString() !== req.user._conditions._id.toString()) {
         throw new APIerror(
@@ -326,11 +326,11 @@ const deleteVideo = asyncHandler(async (req, res) => {
 const togglePublishStatus = asyncHandler(async (req, res) => {
     const { videoId } = req.params
     if (!isValidObjectId(videoId)) {
-        throw new APIerror(200, "Invalid video id")
+        throw new APIerror(400, "Invalid video id")
     }
     const video = await Video.findById(videoId)
     if (!video) {
-        throw new APIerror(200, "Video not found")
+        throw new APIerror(400, "Video not found")
     }
     if (video?.owner.toString() !== req.user._conditions._id.toString()) {
         throw new APIerror(
