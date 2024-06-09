@@ -304,7 +304,6 @@ const deleteVideo = asyncHandler(async (req, res) => {
         )
     }
     const deletedVideo = await Video.findByIdAndDelete(videoId)
-    console.log(deletedVideo)
     if (!deletedVideo) {
         throw new APIerror(400, "Failed to delete the video ")
     }

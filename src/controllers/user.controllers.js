@@ -371,7 +371,6 @@ const getUserChannelInfo = asyncHandler(async (req, res) => {
 })
 const getWatchHistory = asyncHandler(async (req, res) => {
     const userId = req.user._conditions._id
-    console.log(userId)
     const user = await User.aggregate([
         {
             $match: {

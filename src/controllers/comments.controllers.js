@@ -130,7 +130,6 @@ const updateComment = asyncHandler(async (req, res) => {
             new: true,
         }
     )
-    console.log(updatedComment)
     if (!updatedComment) {
         throw new APIerror(500, "Failed to update comment")
     }
