@@ -3,7 +3,7 @@ import { isValidObjectId } from "mongoose"
 import { Comments } from "../models/comments.model.js"
 import { Likes } from "../models/likes.model.js"
 import APIerror from "../utils/APIerrors.js"
-import APIresponse from "../utils/APIresponse.js"
+import APIresponse from "../utils/APIerrors.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
 
 const getVideoComments = asyncHandler(async (req, res) => {
