@@ -1,11 +1,11 @@
 import mongoose, { Schema } from "mongoose"
 const playlistSchema = new Schema(
     {
-        videoName: {
+        playlistName: {
             type: String,
             required: true,
         },
-        videoDiscription: {
+        playlistDiscription: {
             type: String,
             required: true,
         },
