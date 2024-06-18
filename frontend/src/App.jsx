@@ -15,26 +15,6 @@ function App() {
   }, [dispatch]);
   return (
     <>
-      {/* <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route
-            path=""
-            element={
-              <AuthLayout authentication={false}>
-                <Homepage />
-              </AuthLayout>
-            }
-          />
-        </Route>
-        <Route
-          path="/login"
-          element={
-            <AuthLayout authentication={false}>
-              <Login />
-            </AuthLayout>
-          }
-        />
-      </Routes> */}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route
