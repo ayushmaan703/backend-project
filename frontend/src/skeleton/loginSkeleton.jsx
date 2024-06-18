@@ -1,5 +1,5 @@
 import React from "react";
-function loginSkeleton() {
+function LoginSkeleton() {
   const loadingSkeletonStyle =
     "animate-pulse bg-slate-500 h-10 w-full rounded mb-2";
   return (
@@ -19,3 +19,4 @@ function loginSkeleton() {
     </>
   );
 }
+export default LoginSkeleton

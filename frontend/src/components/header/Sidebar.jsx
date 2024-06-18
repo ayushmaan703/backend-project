@@ -7,12 +7,13 @@ import { IoFolderOutline } from "react-icons/io5";
 import { TbUserCheck } from "react-icons/tb";
 import { CiSettings } from "react-icons/ci";
 import { MdOutlineContactSupport } from "react-icons/md";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (
     <>
       <div className="text-white sm:block hidden sm:w-44 w-16 sm:p-3 p-2 border-[#0E0F0F] border-r xl:space-y-60 space-y-32 h-[93vh]">
-        <div className="space-y-4 sm:pt-4 pt-1">
+        <div className="space-y-4 sm:pt-4 pt-1"> 
           <div className="flex items-center gap-2 justify-center sm:justify-start hover:bg-[#222222] cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg">
             <RiHome6Line size={25} />
             <span className="text-base hidden sm:block ">Home</span>

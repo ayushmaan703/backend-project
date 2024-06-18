@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Button from "./components/Button";
-import Logo from "./components/Logo";
+import Button from "./Button";
+import Logo from "./Logo";
 function loginPopUp() {
   return (
     <>
@@ -15,7 +15,7 @@ function loginPopUp() {
           </p>
           <Link to="/login">
             <Button
-              className="bg-purple-500 w-full py-2 px-4 font-bold text-lg rounded"
+              className="bg-cyan-500 w-full py-2 px-4 font-bold text-lg rounded"
               textColor="text-black"
             >
               Login

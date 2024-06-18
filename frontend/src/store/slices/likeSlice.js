@@ -13,7 +13,7 @@ export const videoLikeToggle = createAsyncThunk(
       toast.success("Video liked succesfully");
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }
@@ -26,7 +26,7 @@ export const commentLikeToggle = createAsyncThunk(
       toast.success("Comment liked succesfully");
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }
@@ -39,7 +39,7 @@ export const tweetLikeToggle = createAsyncThunk(
       toast.success("Tweet liked succesfully");
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }
@@ -49,7 +49,7 @@ export const getLikedVideos = createAsyncThunk("getLikedVideos", async () => {
     const response = await axiosInstance.get("/likes/videos");
     return response.data;
   } catch (error) {
-    toast.error(error?.response?.data?.error);
+    toast.error(error?.response?.data?.message);
     throw error;
   }
 });

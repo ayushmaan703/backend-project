@@ -16,7 +16,7 @@ export const toggleSubscription = createAsyncThunk(
       );
       return response.data.data.subscribed;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }
@@ -42,7 +42,7 @@ export const getSubscribedChannels = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }

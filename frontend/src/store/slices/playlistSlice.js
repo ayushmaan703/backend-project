@@ -20,7 +20,7 @@ export const createPlaylist = createAsyncThunk(
       }
       return response.data.data;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }
@@ -32,7 +32,7 @@ export const getUserPlaylists = createAsyncThunk(
       const response = await axiosInstance.get(`/playlist/user/${userId}`);
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }
@@ -49,7 +49,7 @@ export const addVideoToPlaylist = createAsyncThunk(
       }
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }
@@ -61,7 +61,7 @@ export const getPlaylistById = createAsyncThunk(
       const response = await axiosInstance.get(`/playlist/g/${playlistId}`);
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }
@@ -78,7 +78,7 @@ export const deleteVideoFromPlaylist = createAsyncThunk(
       }
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }
@@ -93,7 +93,7 @@ export const deletePlaylist = createAsyncThunk(
       }
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }
@@ -111,7 +111,7 @@ export const updatePlaylist = createAsyncThunk(
       }
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }
