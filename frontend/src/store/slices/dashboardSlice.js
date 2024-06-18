@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import axiosInstance from "../../helper/axiosinstance";
-initialState = {
+const initialState = {
   loading: false,
   channelStats: null,
   channelVideos: [],
@@ -43,7 +43,7 @@ const dashboardSlice = createSlice({
     builder.addCase(getChannelVideos.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(getChannelVideos.pending, (state) => {
+    builder.addCase(getChannelVideos.fulfilled, (state) => {
       state.loading = false;
       state.getChannelVideos = action.payload;
     });

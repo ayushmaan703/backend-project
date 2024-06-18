@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import axiosInstance from "../../helper/axiosinstance";
-initialState = {
+const initialState = {
   loading: false,
   subscribed: null,
   channelSubscribers: [],
@@ -48,7 +48,7 @@ export const getSubscribedChannels = createAsyncThunk(
   }
 );
 const subscriptionSlice = createSlice({
-  name: subscription,
+  name: "subscription",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

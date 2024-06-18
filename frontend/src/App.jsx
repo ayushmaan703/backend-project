@@ -1,9 +1,18 @@
-import "./App.css";
-
+import React, { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { currentUserInfo } from "./store/slices/authSlice.js";
+import Layout from "./Layout.jsx";
+import Homepage from "./pages/Homepage.jsx";
 function App() {
   return (
     <>
-      <h1 className="text-5xl text-cyan-300 max-w-full max-h-svh bg-neutral-900">hello</h1>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="" element={<Homepage />} />
+        </Route>
+      </Routes>
     </>
   );
 }

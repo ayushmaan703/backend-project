@@ -7,7 +7,7 @@ const initialState = {
   history: [],
 };
 
-export const getUserChannelInfo = createAsyncThunk(
+export const getUserChannelProfile = createAsyncThunk(
   "getUserChannelProfile",
   async (username) => {
     try {
@@ -36,10 +36,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(userChannelProfile.pending, (state) => {
+    builder.addCase(getUserChannelProfile.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(userChannelProfile.fulfilled, (state, action) => {
+    builder.addCase(getUserChannelProfile.fulfilled, (state, action) => {
       state.loading = false;
       state.profileData = action.payload;
     });
