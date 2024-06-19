@@ -6,7 +6,7 @@ import { HiOutlineVideoCamera } from "react-icons/hi2";
 import { IoFolderOutline } from "react-icons/io5";
 import { TbUserCheck } from "react-icons/tb";
 import { CiSettings } from "react-icons/ci";
-import { IoMdLogOut  } from "react-icons/io";
+import { IoMdLogOut } from "react-icons/io";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -51,10 +51,12 @@ function Sidebar() {
         </div>
 
         <div className="space-y-4">
-          <div className="flex items-center gap-2 justify-center sm:justify-start hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg">
-            <IoMdLogOut  size={25} />
-            {authStatus && <span className="text-base hidden sm:block">Logout</span>}
-          </div>
+          {authStatus && (
+            <div className="flex items-center gap-2 justify-center sm:justify-start hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg">
+              <IoMdLogOut size={25} />
+              <span className="text-base hidden sm:block">Logout</span>
+            </div>
+          )}
           <div className="flex items-center gap-2 justify-center sm:justify-start hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg">
             <CiSettings size={25} />
             <span className="text-base hidden sm:block">Settings</span>
