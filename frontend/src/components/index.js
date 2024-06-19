@@ -7,6 +7,7 @@ import Container from "./Container";
 import Input from "./Input";
 import LoginPopUp from "./LoginPopUp";
 import Logo from "./Logo";
+import EditAvatar from "./EditAvatar";
 export {
   Navbar,
   Search,
@@ -17,4 +18,5 @@ export {
   Input,
   LoginPopUp,
   Logo,
+  EditAvatar
 };

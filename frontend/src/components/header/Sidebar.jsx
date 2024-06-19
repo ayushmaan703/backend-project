@@ -7,16 +7,23 @@ import { IoFolderOutline } from "react-icons/io5";
 import { TbUserCheck } from "react-icons/tb";
 import { CiSettings } from "react-icons/ci";
 import { MdOutlineContactSupport } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 function Sidebar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const username = useSelector((state) => state.auth?.userData?.userName);
   return (
     <>
       <div className="text-white sm:block hidden sm:w-44 w-16 sm:p-3 p-2 border-[#0E0F0F] border-r xl:space-y-60 space-y-32 h-[93vh]">
-        <div className="space-y-4 sm:pt-4 pt-1"> 
+        <div className="space-y-4 sm:pt-4 pt-1">
           <div className="flex items-center gap-2 justify-center sm:justify-start hover:bg-[#222222] cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg">
             <RiHome6Line size={25} />
-            <span className="text-base hidden sm:block ">Home</span>
+            <NavLink
+            to="/">
+              <span className="text-base hidden sm:block ">Home</span>
+            </NavLink>
           </div>
           <div className="flex items-center justify-center sm:justify-start gap-2 hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F]  rounded-lg">
             <BiLike size={25} />
@@ -28,7 +35,9 @@ function Sidebar() {
           </div>
           <div className="flex items-center justify-center sm:justify-start gap-2 hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg">
             <HiOutlineVideoCamera size={25} />
-            <span className="text-base hidden sm:block">My Content</span>
+            <NavLink to={`/channel/${username}`}>
+              <span className="text-base hidden sm:block">My Content</span>
+            </NavLink>
           </div>
           <div className="flex items-center justify-center sm:justify-start gap-2 hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg">
             <IoFolderOutline size={25} />

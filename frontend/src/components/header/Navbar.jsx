@@ -34,15 +34,14 @@ function Navbar() {
 
         {/* login and signup buutons */}
         <div className="space-x-2 sm:block hidden">
-          <NavLink
-          to="/login">
-          <Button className=" border hover:bg-[#222222] border-[#0E0F0F] sm:px-4 sm:py-2 p-2">
-            Login
-          </Button>
+          <NavLink to="/login">
+            <Button className=" border hover:bg-[#222222] border-[#0E0F0F] sm:px-4 sm:py-2 p-2">
+              Login
+            </Button>
+          </NavLink>
           <Button className="font-semibold border hover:bg-[#222222] border-[#0E0F0F] sm:px-4 sm:py-2 ">
             Sign up
           </Button>
-          </NavLink>
         </div>
 
         {/* 3 dot type icon for smaller screens */}
@@ -64,7 +63,6 @@ function Navbar() {
                 size={35}
                 onClick={() => setToggleMenu((prev) => !prev)}
               />
-              
             </div>
 
             <div className="flex flex-col justify-between h-full py-5 px-3">

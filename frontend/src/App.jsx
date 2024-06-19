@@ -7,6 +7,7 @@ import Layout from "./Layout.jsx";
 import Homepage from "./pages/Homepage.jsx";
 import AuthLayout from "./components/AuthLayout.jsx";
 import Login from "./components/header/Login.jsx";
+import Channel from "./pages/channel/Channel.jsx";
 function App() {
   const dispatch = useDispatch();
 
@@ -25,6 +26,14 @@ function App() {
               </AuthLayout>
             }
           />
+          <Route
+            path="/channel/:username"
+            element={
+              <AuthLayout authentication>
+                <Channel />
+              </AuthLayout>
+            }
+          ></Route>
         </Route>
         <Route
           path="/login"
