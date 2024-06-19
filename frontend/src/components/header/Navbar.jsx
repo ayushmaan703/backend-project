@@ -10,9 +10,12 @@ import { CiSettings } from "react-icons/ci";
 import { MdOutlineContactSupport } from "react-icons/md";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const authStatus = useSelector((state) => state.auth.status);
+  const profileImg = useSelector((state) => state.auth.userData?.avatar);
 
   return (
     <>
@@ -33,19 +36,28 @@ function Navbar() {
         </div>
 
         {/* login and signup buutons */}
-        <div className="space-x-2 sm:block hidden">
-          <NavLink to="/login">
-            <Button className=" border hover:bg-[#222222] border-[#0E0F0F] sm:px-4 sm:py-2 p-2">
-              Login
-            </Button>
-          </NavLink>
-          <NavLink 
-          to="/signup">
-            <Button className="font-semibold border hover:bg-[#222222] border-[#0E0F0F] sm:px-4 sm:py-2 ">
-              Sign up
-            </Button>
-          </NavLink>
-        </div>
+        {authStatus ? (
+          <div className="rounded-full sm:block hidden">
+            <img
+              src={profileImg}
+              alt="profileImg"
+              className="rounded-full w-10 h-10 object-cover"
+            />
+          </div>
+        ) : (
+          <div className="space-x-2 sm:block hidden">
+            <NavLink to="/login">
+              <Button className=" border hover:bg-[#222222] border-[#0E0F0F] sm:px-4 sm:py-2 p-2">
+                Login
+              </Button>
+            </NavLink>
+            <NavLink to="/signup">
+              <Button className="font-semibold border hover:bg-[#222222] border-[#0E0F0F] sm:px-4 sm:py-2 ">
+                Sign up
+              </Button>
+            </NavLink>
+          </div>
+        )}
 
         {/* 3 dot type icon for smaller screens */}
         <div className="sm:hidden block">
