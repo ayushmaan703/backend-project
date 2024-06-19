@@ -67,12 +67,13 @@ const getAllVideos = asyncHandler(async (req, res) => {
         if (!isValidObjectId(userId)) {
             throw new APIerror(400, "Invalid user")
         }
+
+        addingPipelines.push({
+            $match: {
+                owner: new mongoose.Types.ObjectId(`${userId}`),
+            },
+        })
     }
-    addingPipelines.push({
-        $match: {
-            owner: new mongoose.Types.ObjectId(`${userId}`),
-        },
-    })
     if (sortBy && sortType) {
         addingPipelines.push({
             $sort: {
