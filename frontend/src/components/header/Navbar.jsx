@@ -19,7 +19,7 @@ function Navbar() {
       <nav className="w-full bg-[#0E0F0F] flex justify-between items-center p-4 sm:gap-5 gap-2 border-b-2 border-gray-500 sticky top-0 z-50">
         <div className="flex items-center justify-center gap-2 cursor-pointer">
           <IoLogoYoutube size={35} color="cyan" />
-          <span className="font-bold text-white">YOUTUBE</span>
+          <span className="font-bold text-white">VIDEOTUBE</span>
         </div>
 
         {/* search for large screens */}
@@ -39,9 +39,12 @@ function Navbar() {
               Login
             </Button>
           </NavLink>
-          <Button className="font-semibold border hover:bg-[#222222] border-[#0E0F0F] sm:px-4 sm:py-2 ">
-            Sign up
-          </Button>
+          <NavLink 
+          to="/signup">
+            <Button className="font-semibold border hover:bg-[#222222] border-[#0E0F0F] sm:px-4 sm:py-2 ">
+              Sign up
+            </Button>
+          </NavLink>
         </div>
 
         {/* 3 dot type icon for smaller screens */}

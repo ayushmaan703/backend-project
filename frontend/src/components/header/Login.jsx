@@ -68,8 +68,8 @@ function Login() {
 
             <Button
               type="submit"
-              bgColor="bg-purple-500"
-              className="w-full sm:py-3 py-2 hover:bg-purple-700 text-lg"
+              bgColor="bg-cyan-500"
+              className="w-full sm:py-3 py-2 hover:bg-cyan-700 text-lg"
             >
               Login
             </Button>
@@ -78,7 +78,7 @@ function Login() {
               Don&apos;t have an account?{" "}
               <Link
                 to={"/signup"}
-                className="text-purple-600 cursor-pointer hover:opacity-70"
+                className="text-cyan-600 cursor-pointer hover:opacity-70"
               >
                 SignUp
               </Link>

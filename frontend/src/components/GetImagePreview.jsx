@@ -27,15 +27,13 @@ function GetImagePreview({
           className="cursor-pointer relative flex flex-col justify-center items-start"
         >
           {label && <label className="inline-block mb-2 pl-1">{label}</label>}
-          {/* <div className="relative flex justify-center items-center"> */}
           <img src={preview || image} className={className} />
           {cameraIcon && (
             <FaCamera
               size={cameraSize}
-              className="hover:text-purple-500 absolute inline-flex justify-center items-center w-full"
+              className="hover:text-cyan-500 absolute inline-flex justify-center items-center w-full"
             />
           )}
-          {/* </div> */}
           <Controller
             name={name}
             control={control}

@@ -6,8 +6,8 @@ const initialState = {
   status: false,
   userData: null,
 };
-export const createAccount = createAsyncThunk("register", async (data) => {
-  const formData = new formData();
+export const createAccount = createAsyncThunk("createAccount", async (data) => {
+  const formData = new FormData();
   formData.append("userName", data.userName);
   formData.append("fullName", data.fullName);
   formData.append("email", data.email);
@@ -16,16 +16,18 @@ export const createAccount = createAsyncThunk("register", async (data) => {
   if (data.coverImage) {
     formData.append("coverImage", data.coverImage[0]);
   }
+  console.log(formData);
   try {
     const response = await axiosInstance.post("/user/register", formData);
     toast.success("Registered Succcessfully");
     return response.data;
   } catch (error) {
-    toast.error(error?.response?.data?.error);
+    toast.error(error?.response?.data?.message);
     throw error;
   }
 });
 export const userLogin = createAsyncThunk("login", async (data) => {
+  console.log(data);
   try {
     const response = await axiosInstance.post("/user/login", data);
     toast.success("Logged in successfully");
@@ -126,6 +128,9 @@ const authSlice = createSlice({
     builder.addCase(createAccount.fulfilled, (state) => {
       state.loading = false;
     });
+    // builder.addCase(createAccount.rejected, (state) => {
+    //   state.loading = false;
+    // });
     builder.addCase(userLogin.pending, (state) => {
       state.loading = true;
     });

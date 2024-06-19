@@ -8,6 +8,8 @@ import Homepage from "./pages/Homepage.jsx";
 import AuthLayout from "./components/AuthLayout.jsx";
 import Login from "./components/header/Login.jsx";
 import Channel from "./pages/channel/Channel.jsx";
+import TermsAndConditions from "./pages/TermsAndConditon.jsx";
+import SignUp from "./components/SignUp.jsx";
 function App() {
   const dispatch = useDispatch();
 
@@ -40,6 +42,22 @@ function App() {
           element={
             <AuthLayout authentication={false}>
               <Login />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <AuthLayout authentication={false}>
+              <SignUp />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/terms&conditions"
+          element={
+            <AuthLayout authentication>
+              <TermsAndConditions />
             </AuthLayout>
           }
         />
