@@ -9,13 +9,16 @@ import { CiSettings } from "react-icons/ci";
 import { IoMdLogOut } from "react-icons/io";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import { userLogout } from "../../store/slices/authSlice";
 function Sidebar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const username = useSelector((state) => state.auth?.userData?.userName);
   const authStatus = useSelector((state) => state.auth.status);
-
+  const logout = async () => {
+    await dispatch(userLogout());
+    navigate("/");
+  };
   return (
     <>
       <div className="text-white sm:block hidden sm:w-44 w-16 sm:p-3 p-2 border-[#0E0F0F] border-r xl:space-y-60 space-y-32 h-[93vh]">
@@ -52,7 +55,10 @@ function Sidebar() {
 
         <div className="space-y-4">
           {authStatus && (
-            <div className="flex items-center gap-2 justify-center sm:justify-start hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg">
+            <div
+              onClick={() => logout()}
+              className="flex items-center gap-2 justify-center sm:justify-start hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg"
+            >
               <IoMdLogOut size={25} />
               <span className="text-base hidden sm:block">Logout</span>
             </div>

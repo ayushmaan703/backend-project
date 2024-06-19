@@ -144,7 +144,7 @@ const authSlice = createSlice({
     });
     builder.addCase(userLogout.fulfilled, (state) => {
       state.loading = false;
-      state.status = true;
+      state.status = false;
       state.userData = null;
     });
     builder.addCase(currentUserInfo.pending, (state) => {
