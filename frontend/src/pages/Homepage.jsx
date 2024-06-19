@@ -24,7 +24,6 @@ function HomePage() {
       setPage((prev) => prev + 1);
     }
   }, [page, hasNextPage, dispatch]);
-
   return (
     <Container>
       <InfiniteScroll fetchMore={fetchMoreVideos} hasNextPage={hasNextPage}>

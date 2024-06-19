@@ -10,6 +10,8 @@ import Login from "./components/header/Login.jsx";
 import Channel from "./pages/channel/Channel.jsx";
 import TermsAndConditions from "./pages/TermsAndConditon.jsx";
 import SignUp from "./components/SignUp.jsx";
+import LikedVideos from "./pages/LikedVideos.jsx";
+import History from "./pages/History.jsx";
 function App() {
   const dispatch = useDispatch();
 
@@ -36,6 +38,22 @@ function App() {
               </AuthLayout>
             }
           ></Route>
+          <Route
+            path="/liked-videos"
+            element={
+              <AuthLayout authentication>
+                <LikedVideos />
+              </AuthLayout>
+            }
+          />
+          <Route
+            path="/history"
+            element={
+              <AuthLayout authentication>
+                <History />
+              </AuthLayout>
+            }
+          />
         </Route>
         <Route
           path="/login"

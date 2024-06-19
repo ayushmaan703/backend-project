@@ -31,11 +31,15 @@ function Sidebar() {
           </div>
           <div className="flex items-center justify-center sm:justify-start gap-2 hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F]  rounded-lg">
             <BiLike size={25} />
-            <span className="text-base hidden sm:block">Liked Videos</span>
+            <NavLink to="/liked-videos">
+              <span className="text-base hidden sm:block">Liked Videos</span>
+            </NavLink>
           </div>
           <div className="flex items-center justify-center sm:justify-start gap-2 hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg">
             <BiHistory size={25} />
+            <NavLink to="/history">
             <span className="text-base hidden sm:block">History</span>
+            </NavLink>
           </div>
           <div className="flex items-center justify-center sm:justify-start gap-2 hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg">
             <HiOutlineVideoCamera size={25} />
