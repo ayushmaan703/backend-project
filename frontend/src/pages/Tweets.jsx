@@ -11,7 +11,6 @@ function Tweets() {
   const dispatch = useDispatch();
   const tweets = useSelector((state) => state.tweet?.tweets?.docs);
   const likesOnATweet = useSelector((state) => state.likes);
-  console.log(likesOnATweet);
   window.scrollTo(0, 0);
   useEffect(() => {
     dispatch(getAllTweets({}));

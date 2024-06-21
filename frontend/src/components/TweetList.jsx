@@ -18,7 +18,6 @@ function TweetsList({
   const avatar2 = useSelector((state) => state.user?.profileData?.avatar);
   const authUsername = useSelector((state) => state.auth?.userData?.userName);
   const dispatch = useDispatch();
-
   const [editState, setEditState] = useState({
     editing: false,
     editedContent: content,

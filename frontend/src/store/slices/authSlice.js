@@ -72,13 +72,8 @@ export const changePassword = createAsyncThunk(
   }
 );
 export const currentUserInfo = createAsyncThunk("currentUserInfo", async () => {
-  try {
-    const response = await axiosInstance.post("/user/current-user");
-    return response.data.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
-    throw error;
-  }
+  const response = await axiosInstance.post("/user/current-user");
+  return response.data.data;
 });
 export const updateAvatar = createAsyncThunk("updateAvatar", async (data) => {
   try {
