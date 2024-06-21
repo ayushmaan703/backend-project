@@ -21,7 +21,53 @@ const createTweet = asyncHandler(async (req, res) => {
         .status(200)
         .json(new APIresponse(200, tweet, "Tweet posted sucessfully"))
 })
-
+const getAllTweets = asyncHandler(async (req, res) => {
+    const { page = 1, limit = 10, sortBy, sortType } = req.query
+    const addingPipelines = []
+    if (sortBy && sortType) {
+        addingPipelines.push({
+            $sort: {
+                [sortBy]: sortType === "asc" ? 1 : -1,
+            },
+        })
+    } else {
+        addingPipelines.push({
+            $sort: {
+                createdAt: -1,
+            },
+        })
+    }
+    addingPipelines.push(
+        {
+            $lookup: {
+                from: "users",
+                localField: "owner",
+                foreignField: "_id",
+                as: "ownerDetails",
+                pipeline: [
+                    {
+                        $project: {
+                            userName: 1,
+                            avatar:1
+                        },
+                    },
+                ],
+            },
+        },
+        {
+            $unwind: "$ownerDetails",
+        }
+    )
+    const tweetAggregate = Tweets.aggregate(addingPipelines)
+    const options = {
+        page: parseInt(page, 10),
+        limit: parseInt(limit, 10),
+    }
+    const tweet = await Tweets.aggregatePaginate(tweetAggregate, options)
+    return res
+        .status(200)
+        .json(new APIresponse(200, tweet, "All tweets fetched sucessfully"))
+})
 const getUserTweets = asyncHandler(async (req, res) => {
     const { userId } = req.params
     if (!isValidObjectId(userId)) {
@@ -49,7 +95,7 @@ const getUserTweets = asyncHandler(async (req, res) => {
                     {
                         $project: {
                             userName: 1,
-                            avatar:1
+                            avatar: 1,
                         },
                     },
                 ],
@@ -100,7 +146,7 @@ const getUserTweets = asyncHandler(async (req, res) => {
                 ownerDetails: 1,
                 likes: 1,
                 isliked: 1,
-                createdAt:1
+                createdAt: 1,
             },
         },
     ])
@@ -160,4 +206,4 @@ const deleteTweet = asyncHandler(async (req, res) => {
         .json(new APIresponse(200, { tweetId }, "Tweet deleted successfully"))
 })
 
-export { createTweet, getUserTweets, updateTweet, deleteTweet }
+export { createTweet, getUserTweets, updateTweet, deleteTweet, getAllTweets }
