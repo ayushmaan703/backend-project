@@ -68,7 +68,7 @@ function ChannelHeader({
               />
               {edit && (
                 <div className="absolute inset-0 flex justify-center items-start">
-                  <EditAvatar preImage={avatar} />
+                  <EditAvatar cover={false} preImage={avatar} />
                 </div>
               )}
             </div>
@@ -105,6 +105,7 @@ function ChannelHeader({
               <Link to={`/channel/${username}`}>
                 <Button className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-cyan-500">
                   View Channel
+                  {console.log(username)}
                 </Button>
               </Link>
             )}

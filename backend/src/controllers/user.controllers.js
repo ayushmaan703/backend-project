@@ -265,7 +265,6 @@ const changeAvatar = asyncHandler(async (req, res) => {
         },
         { new: true }
     ).select("-password")
-
     return res
         .status(200)
         .json(new APIresponse(200, user, "Avatar image updated successfully"))

@@ -61,6 +61,7 @@ export const userRefreshToken = createAsyncThunk(
 export const changePassword = createAsyncThunk(
   "changePassword",
   async (data) => {
+    console.log(data);
     try {
       const response = await axiosInstance.post("/user/change-password", data);
       toast.success("Password changed successfully");
@@ -79,7 +80,7 @@ export const updateAvatar = createAsyncThunk("updateAvatar", async (data) => {
   try {
     const response = await axiosInstance.post("user/update-avatar", data);
     toast.success("Avatar updated successfully");
-    return response.data;
+    return response.data.data;
   } catch (error) {
     toast.error(error?.response?.data?.message);
     throw error;
@@ -102,9 +103,10 @@ export const updateUserDetails = createAsyncThunk(
   "updateUserDetails",
   async (data) => {
     try {
-      const response = await axiosInstance.post("/user/update-details", data);
+      const response = await axiosInstance.patch("/user/update-details", data);
+      console.log(response.data);
       toast.success("Details updated sucessfully");
-      return response.data;
+      return response.data.data;
     } catch (error) {
       toast.error(error?.response?.data?.error);
       throw error;

@@ -17,6 +17,9 @@ import ChannelPlaylist from "./pages/channel/ChannelPlaylist.jsx";
 import ChannelTweets from "./pages/channel/ChannelTweet.jsx";
 import ChannelSubscribers from "./pages/channel/ChannelSubscribers.jsx";
 import Tweets from "./pages/Tweets.jsx";
+import EditChannel from "./pages/EditChannel.jsx";
+import EditPersonalInfo from "./components/EditPersonalInfo.jsx";
+import ChangePassword from "./components/ChangePassword.jsx";
 function App() {
   const dispatch = useDispatch();
 
@@ -100,6 +103,31 @@ function App() {
               </AuthLayout>
             }
           />
+          <Route
+            path="/edit"
+            element={
+              <AuthLayout authentication>
+                <EditChannel />
+              </AuthLayout>
+            }
+          >
+            <Route
+              path="personalInfo"
+              element={
+                <AuthLayout authentication>
+                  <EditPersonalInfo />
+                </AuthLayout>
+              }
+            />
+            <Route
+              path="password"
+              element={
+                <AuthLayout authentication>
+                  <ChangePassword />
+                </AuthLayout>
+              }
+            />
+          </Route>
         </Route>
         <Route
           path="/login"
