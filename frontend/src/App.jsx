@@ -20,6 +20,7 @@ import Tweets from "./pages/Tweets.jsx";
 import EditChannel from "./pages/EditChannel.jsx";
 import EditPersonalInfo from "./components/EditPersonalInfo.jsx";
 import ChangePassword from "./components/ChangePassword.jsx";
+import SearchVideos from "./pages/SearchVideos.jsx";
 function App() {
   const dispatch = useDispatch();
 
@@ -35,6 +36,14 @@ function App() {
             element={
               <AuthLayout authentication={false}>
                 <Homepage />
+              </AuthLayout>
+            }
+          />
+          <Route
+            path="/search/:query"
+            element={
+              <AuthLayout authentication={false}>
+                <SearchVideos />
               </AuthLayout>
             }
           />
