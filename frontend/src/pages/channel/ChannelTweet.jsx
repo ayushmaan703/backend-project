@@ -18,12 +18,12 @@ function ChannelTweets() {
       {tweets?.map((tweet) => (
         <TweetsList
           key={tweet?._id}
-          avatar={tweet?.ownerDetails[0]?.avatar}
+          avatar={tweet?.ownerDetails?.avatar}
           content={tweet?.tweetContent}
           createdAt={tweet?.createdAt}
           likesCount={tweet?.likes}
           tweetId={tweet?._id}
-          username={tweet?.ownerDetails[0]?.userName}
+          username={tweet?.ownerDetails?.userName}
           isLiked={tweet?.isLiked}
         />
       ))}

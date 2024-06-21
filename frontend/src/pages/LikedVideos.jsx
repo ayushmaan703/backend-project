@@ -33,10 +33,10 @@ function LikedVideos() {
           {likedVideos?.map((video) => (
             <VideoList
               key={video.likedVideo._id}
-              avatar={video.likedVideo.ownerDetails?.avatar?.url}
+              avatar={video.likedVideo.ownerDetails?.avatar}
               duration={video.likedVideo.duration}
               title={video.likedVideo.title}
-              thumbnail={video.likedVideo.thumbnail?.url}
+              thumbnail={video.likedVideo.thumbnail}
               createdAt={video.likedVideo.createdAt}
               views={video.likedVideo.views}
               channelName={video.likedVideo.ownerDetails?.username}

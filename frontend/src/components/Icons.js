@@ -21,6 +21,7 @@ import { RxAvatar } from "react-icons/rx";
 import { FaRegEye, FaRegHeart } from "react-icons/fa";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import {IoMdLogOut } from "react-icons/io"
+import { FaThreads } from "react-icons/fa6";
 export {
     IoCloseCircleOutline,
     BiLike,
@@ -45,4 +46,5 @@ export {
     FaRegHeart,
     MdOutlineCloudUpload,
     IoMdLogOut ,
+    FaThreads
 }

@@ -16,6 +16,7 @@ import ChannelVideos from "./pages/channel/ChannelVideo.jsx";
 import ChannelPlaylist from "./pages/channel/ChannelPlaylist.jsx";
 import ChannelTweets from "./pages/channel/ChannelTweet.jsx";
 import ChannelSubscribers from "./pages/channel/ChannelSubscribers.jsx";
+import Tweets from "./pages/Tweets.jsx";
 function App() {
   const dispatch = useDispatch();
 
@@ -80,6 +81,14 @@ function App() {
             element={
               <AuthLayout authentication>
                 <LikedVideos />
+              </AuthLayout>
+            }
+          />
+          <Route
+            path="/tweets"
+            element={
+              <AuthLayout authentication>
+                <Tweets />
               </AuthLayout>
             }
           />
