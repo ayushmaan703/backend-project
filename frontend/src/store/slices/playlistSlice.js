@@ -7,7 +7,7 @@ const initialState = {
   playlists: [],
 };
 
-export const createPlaylist = createAsyncThunk(
+export const createAPlaylist = createAsyncThunk(
   "createPlaylist",
   async ({ name, description }) => {
     try {

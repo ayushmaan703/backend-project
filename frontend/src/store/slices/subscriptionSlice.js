@@ -25,10 +25,10 @@ export const getChannelSubscribersListOfTheUser = createAsyncThunk(
   "getChannelSubscribersListOfTheUser",
   async (channelId) => {
     try {
-      const response = await axiosInstance.post(`/subscription/u/${channelId}`);
+      const response = await axiosInstance.get(`/subscription/u/${channelId}`);
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.message);
       throw error;
     }
   }

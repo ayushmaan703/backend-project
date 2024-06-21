@@ -44,5 +44,5 @@ export {
     FaRegEye,
     FaRegHeart,
     MdOutlineCloudUpload,
-    IoMdLogOut 
+    IoMdLogOut ,
 }

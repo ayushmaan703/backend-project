@@ -12,6 +12,10 @@ import TermsAndConditions from "./pages/TermsAndConditon.jsx";
 import SignUp from "./components/SignUp.jsx";
 import LikedVideos from "./pages/LikedVideos.jsx";
 import History from "./pages/History.jsx";
+import ChannelVideos from "./pages/channel/ChannelVideo.jsx";
+import ChannelPlaylist from "./pages/channel/ChannelPlaylist.jsx";
+import ChannelTweets from "./pages/channel/ChannelTweet.jsx";
+import ChannelSubscribers from "./pages/channel/ChannelSubscribers.jsx";
 function App() {
   const dispatch = useDispatch();
 
@@ -37,7 +41,40 @@ function App() {
                 <Channel />
               </AuthLayout>
             }
-          ></Route>
+          >
+            <Route
+              path="videos"
+              element={
+                <AuthLayout authentication>
+                  <ChannelVideos />
+                </AuthLayout>
+              }
+            />
+            <Route
+              path="playlists"
+              element={
+                <AuthLayout authentication>
+                  <ChannelPlaylist />
+                </AuthLayout>
+              }
+            />
+            <Route
+              path="tweets"
+              element={
+                <AuthLayout authentication>
+                  <ChannelTweets />
+                </AuthLayout>
+              }
+            />
+            <Route
+              path="subscribed"
+              element={
+                <AuthLayout authentication>
+                  <ChannelSubscribers />
+                </AuthLayout>
+              }
+            />
+          </Route>
           <Route
             path="/liked-videos"
             element={

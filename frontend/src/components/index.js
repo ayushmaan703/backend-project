@@ -8,6 +8,9 @@ import Input from "./Input";
 import LoginPopUp from "./LoginPopUp";
 import Logo from "./Logo";
 import EditAvatar from "./EditAvatar";
+import Like from "./Like";
+import DeleteConfirmation from "./DeleteConfirmation";
+import Edit from "./Edit";
 export {
   Navbar,
   Search,
@@ -18,5 +21,8 @@ export {
   Input,
   LoginPopUp,
   Logo,
-  EditAvatar
+  EditAvatar,
+  Like,
+  DeleteConfirmation,
+  Edit,
 };
