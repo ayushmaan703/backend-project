@@ -228,24 +228,23 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     if (!email) {
         throw new APIerror(400, "New email required")
     }
-    const user = User.findByIdAndUpdate(
-        req.user._conditions._id,
+    const userId = req.user._conditions._id
+    const user = await User.findByIdAndUpdate(
+        userId,
         {
             $set: {
                 fullName: fullName,
                 email: email,
             },
         },
-        { new: true }
+        {
+            new: true,
+        }
     ).select("-password")
     return res
         .status(200)
         .json(
-            new APIresponse(
-                200,
-                { fullName, email },
-                "Account details updated successfully"
-            )
+            new APIresponse(200, user, "Account details updated successfully")
         )
 })
 const changeAvatar = asyncHandler(async (req, res) => {

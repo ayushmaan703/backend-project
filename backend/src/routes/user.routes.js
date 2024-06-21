@@ -33,7 +33,7 @@ router.route("/logout").post(verifyJWT, logoutUser)
 router.route("/refresh-token").post(getRefreshToken)
 router.route("/change-password").post(verifyJWT, changePassword)
 router.route("/current-user").post(verifyJWT, getCurrentUser)
-router.route("/update-details").post(verifyJWT, updateAccountDetails)
+router.route("/update-details").patch(verifyJWT, updateAccountDetails)
 router
     .route("/update-avatar")
     .post(verifyJWT, upload.single("avatar"), changeAvatar)
