@@ -104,7 +104,7 @@ function ChannelPlaylist() {
           {playlists?.map((playlist) => (
             <Link
               to={`/playlist/${playlist._id}`}
-              key={playlist.id}
+              key={playlist._id}
               className="relative h-[15rem] w-full border border-slate-500"
             >
               <div className="absolute flex justify-between bottom-0 left-0 border-t py-1 px-2 w-full backdrop-contrast-75">
