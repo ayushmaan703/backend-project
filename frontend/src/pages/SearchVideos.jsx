@@ -89,7 +89,7 @@ function SearchVideos() {
             </div>
           </div>
         )}
-        <div className="grid h-screen xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-white overflow-y-scroll">
+        <div className="grid max-h-screen xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-white overflow-y-scroll">
           {videos &&
             videos?.docs?.map((video) => (
               <VideoList

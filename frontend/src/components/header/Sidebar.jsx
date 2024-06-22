@@ -87,22 +87,30 @@ function Sidebar() {
       </div>
 
       {/* for mobile sidebar is bottom bar*/}
-      <div className="border-t-2 text-white h-16 sm:hidden p-1 w-full flex justify-around fixed bottom-0 bg-[#0E0F0F]">
+      <div className="border-t-2  text-white h-16 sm:hidden p-1 w-full flex justify-around fixed bottom-0 bg-[#0E0F0F] z-20">
         <div className="flex flex-col items-center gap-1 cursor-pointer p-1">
           <RiHome6Line size={25} />
-          <span className="text-sm">Home</span>
+          <NavLink to="/">
+            <span className="text-sm">Home</span>
+          </NavLink>
         </div>
         <div className="flex flex-col items-center gap-1 cursor-pointer p-1">
           <BiHistory size={25} />
-          <span className="text-sm">History</span>
+          <NavLink to="/history">
+            <span className="text-sm">History</span>
+          </NavLink>{" "}
         </div>
         <div className="flex flex-col items-center gap-1 cursor-pointer p-1">
           <IoFolderOutline size={25} />
-          <span className="text-sm">Collections</span>
+          <NavLink to="/collections">
+            <span className="text-sm">Collections</span>
+          </NavLink>
         </div>
         <div className="flex flex-col items-center gap-1 cursor-pointer p-1">
           <TbUserCheck size={25} />
-          <span className="text-sm">Subscribers</span>
+          <NavLink to="/subscriptions">
+            <span className="text-sm">Subscriptions</span>
+          </NavLink>
         </div>
       </div>
     </>

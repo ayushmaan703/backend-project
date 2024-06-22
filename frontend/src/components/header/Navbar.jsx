@@ -10,13 +10,21 @@ import { CiSettings } from "react-icons/ci";
 import { MdOutlineContactSupport } from "react-icons/md";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { IoMdLogOut } from "react-icons/io";
+import { userLogout } from "../../store/slices/authSlice";
+import SearchForSmallScreen from "../SearchForSmallScreen";
 function Navbar() {
+  const dispatch = useDispatch();
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [openSearch, setOpenSearch] = useState(false);
   const authStatus = useSelector((state) => state.auth.status);
   const profileImg = useSelector((state) => state.auth.userData?.avatar);
-
+  const username = useSelector((state) => state.auth?.userData?.userName);
+  const logout = async () => {
+    await dispatch(userLogout());
+    navigate("/");
+  };
   return (
     <>
       <nav className="w-full bg-[#0E0F0F] flex justify-between items-center p-4 sm:gap-5 gap-2 border-b-2 border-gray-500 sticky top-0 z-50">
@@ -32,7 +40,17 @@ function Navbar() {
 
         {/* search for small screens */}
         <div className="text-white w-full inline-flex justify-end sm:hidden pr-4">
-          <CiSearch size={30} fontWeight={"bold"} />
+          <CiSearch
+            size={30}
+            fontWeight={"bold"}
+            onClick={() => setOpenSearch((prev) => !prev)}
+          />
+          {openSearch && (
+            <SearchForSmallScreen
+              open={openSearch}
+              setOpenSearch={setOpenSearch}
+            />
+          )}
         </div>
 
         {/* login and signup buutons */}
@@ -84,30 +102,48 @@ function Navbar() {
               <div className=" space-y-5">
                 <div className="flex items-center border border-slate-500 gap-5 px-3 py-1 hover:bg-[#222222] rounded-lg">
                   <BiLike size={25} />
-                  <span className="text-lg">Liked Videos</span>
+                  <NavLink to="/liked-videos">
+                    <span className="text-lg">Liked Videos</span>
+                  </NavLink>
                 </div>
                 <div className="flex items-center border border-slate-500 gap-5 px-3 py-1 hover:bg-[#222222] rounded-lg">
                   <HiOutlineVideoCamera size={25} />
-                  <span className="text-lg">My Content</span>
+                  <NavLink to={`/channel/${username}`}>
+                    <span className="text-lg">My Content</span>
+                  </NavLink>
                 </div>
-                <div className="flex items-center border border-slate-500 gap-5 px-3 py-1 hover:bg-[#222222] rounded-lg">
+                {/* <div className="flex items-center border border-slate-500 gap-5 px-3 py-1 hover:bg-[#222222] rounded-lg">
                   <MdOutlineContactSupport size={25} />
                   <span className="text-lg">Support</span>
                 </div>
                 <div className="flex items-center border border-slate-500 gap-5 px-3 py-1 hover:bg-[#222222] rounded-lg">
                   <CiSettings size={25} />
                   <span className="text-lg">Settings</span>
-                </div>
+                </div> */}
               </div>
 
-              <div className="flex flex-col space-y-5 mb-3">
-                <Button className="bg-[#222222] border hover:bg-white hover:text-black border-slate-500 py-1 px-3">
-                  Login
-                </Button>
-                <Button className="font-semibold border border-slate-500 hover:bg-white hover:text-black py-1 px-3">
-                  Sign up
-                </Button>
-              </div>
+              {!authStatus ? (
+                <div className="flex flex-col space-y-5 mb-3">
+                  <NavLink to="/login">
+                    <Button className="bg-[#222222] border hover:bg-white hover:text-black border-slate-500 py-1 px-3">
+                      Login
+                    </Button>
+                  </NavLink>
+                  <NavLink to="/signup">
+                    <Button className="font-semibold border border-slate-500 hover:bg-white hover:text-black py-1 px-3">
+                      Sign up
+                    </Button>
+                  </NavLink>
+                </div>
+              ) : (
+                <div
+                  onClick={() => logout()}
+                  className="flex items-center gap-2 justify-center sm:justify-start hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg"
+                >
+                  <IoMdLogOut size={25} />
+                  <span className="text-base hidden sm:block">Logout</span>
+                </div>
+              )}
             </div>
           </div>
         )}
