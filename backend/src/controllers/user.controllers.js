@@ -335,7 +335,7 @@ const getUserChannelInfo = asyncHandler(async (req, res) => {
                     $cond: {
                         if: {
                             $in: [
-                                req.user._conditions._id,
+                                new mongoose.Types.ObjectId(`${req.user._conditions._id}`),
                                 "$subscribers.subsciber",
                             ],
                         },

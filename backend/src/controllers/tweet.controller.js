@@ -48,7 +48,7 @@ const getAllTweets = asyncHandler(async (req, res) => {
                     {
                         $project: {
                             userName: 1,
-                            avatar:1
+                            avatar: 1,
                         },
                     },
                 ],
@@ -127,7 +127,12 @@ const getUserTweets = asyncHandler(async (req, res) => {
                 isLiked: {
                     $cond: {
                         if: {
-                            $in: [req.user._conditions._id, "$likedBy.likedBy"],
+                            $in: [
+                                new mongoose.Types.ObjectId(
+                                    `${req.user._conditions._id}`
+                                ),
+                                "$likedBy.likedBy",
+                            ],
                         },
                         then: true,
                         else: false,
@@ -145,7 +150,7 @@ const getUserTweets = asyncHandler(async (req, res) => {
                 tweetContent: 1,
                 ownerDetails: 1,
                 likes: 1,
-                isliked: 1,
+                isLiked: 1,
                 createdAt: 1,
             },
         },

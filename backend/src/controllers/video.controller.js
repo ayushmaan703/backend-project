@@ -138,7 +138,7 @@ const getVideoById = asyncHandler(async (req, res) => {
                 from: "likes",
                 localField: "_id",
                 foreignField: "likedVideos",
-                as: "likes",
+                as: "totalLikes",
             },
         },
         {
@@ -150,7 +150,7 @@ const getVideoById = asyncHandler(async (req, res) => {
                 pipeline: [
                     {
                         $lookup: {
-                            from: "subsciptions",
+                            from: "subscriptions",
                             localField: "_id",
                             foreignField: "channel",
                             as: "subscribers",
@@ -165,7 +165,9 @@ const getVideoById = asyncHandler(async (req, res) => {
                                 $cond: {
                                     if: {
                                         $in: [
-                                            req.user._conditions._id,
+                                            new mongoose.Types.ObjectId(
+                                                `${req.user._conditions._id}`
+                                            ),
                                             "$subscribers.subsciber",
                                         ],
                                     },
@@ -180,6 +182,7 @@ const getVideoById = asyncHandler(async (req, res) => {
                             userName: 1,
                             isSubscribed: 1,
                             subscriberCount: 1,
+                            avatar: 1,
                         },
                     },
                 ],
@@ -188,12 +191,17 @@ const getVideoById = asyncHandler(async (req, res) => {
         {
             $addFields: {
                 likesCount: {
-                    $size: "$likes",
+                    $size: "$totalLikes",
                 },
                 isLiked: {
                     $cond: {
                         if: {
-                            $in: [req.user._conditions._id, "$likes.likedBy"],
+                            $in: [
+                                new mongoose.Types.ObjectId(
+                                    `${req.user._conditions._id}`
+                                ),
+                                "$totalLikes.likedBy",
+                            ],
                         },
                         then: true,
                         else: false,
