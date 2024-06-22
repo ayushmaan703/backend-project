@@ -46,5 +46,5 @@ export {
     FaRegHeart,
     MdOutlineCloudUpload,
     IoMdLogOut ,
-    FaThreads
+    FaThreads,
 }

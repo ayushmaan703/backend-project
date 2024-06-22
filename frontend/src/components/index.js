@@ -11,6 +11,14 @@ import EditAvatar from "./EditAvatar";
 import Like from "./Like";
 import DeleteConfirmation from "./DeleteConfirmation";
 import Edit from "./Edit";
+import CommentList from "./CommentList";
+import TweetAndComment from "./TweetAndComment";
+import Video from "./Video";
+import Description from "./Description";
+import Spinner from "./Spinner";
+import InfiniteScroll from "./InfiniteScroll";
+import Avatar from "./Avatar"
+import VideoList from "./VideoList"
 export {
   Navbar,
   Search,
@@ -25,4 +33,12 @@ export {
   Like,
   DeleteConfirmation,
   Edit,
+  CommentList,
+  TweetAndComment,
+  Video,
+  Description,
+  Spinner,
+  InfiniteScroll,
+  Avatar,
+  VideoList
 };

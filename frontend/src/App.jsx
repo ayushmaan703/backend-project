@@ -21,6 +21,8 @@ import EditChannel from "./pages/EditChannel.jsx";
 import EditPersonalInfo from "./components/EditPersonalInfo.jsx";
 import ChangePassword from "./components/ChangePassword.jsx";
 import SearchVideos from "./pages/SearchVideos.jsx";
+import VideoDetail from "./pages/VideoDetails.jsx";
+import MySubscriptions from "./pages/MySubscriptions.jsx";
 function App() {
   const dispatch = useDispatch();
 
@@ -97,6 +99,14 @@ function App() {
             }
           />
           <Route
+            path="/subscriptions"
+            element={
+              <AuthLayout authentication>
+                <MySubscriptions />
+              </AuthLayout>
+            }
+          />
+          <Route
             path="/tweets"
             element={
               <AuthLayout authentication>
@@ -151,6 +161,14 @@ function App() {
           element={
             <AuthLayout authentication={false}>
               <SignUp />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/watch/:videoId"
+          element={
+            <AuthLayout authentication>
+              <VideoDetail />
             </AuthLayout>
           }
         />

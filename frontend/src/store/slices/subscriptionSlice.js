@@ -74,9 +74,14 @@ const subscriptionSlice = createSlice({
     });
     builder.addCase(getSubscribedChannels.fulfilled, (state, action) => {
       state.loading = false;
-      state.mySubscriptions = action.payload.filter(
-        (subscription) => subscription?.subscribedChannel?.latestVideo
+      state.mySubscriptions = action.payload.data.filter(
+        (subscription) => subscription?.subscribedChannel
       );
+      // console.log(
+      //   action.payload.data.filter(
+      //     (subscription) => subscription?.subscribedChannel
+      //   )
+      // );
     });
   },
 });
