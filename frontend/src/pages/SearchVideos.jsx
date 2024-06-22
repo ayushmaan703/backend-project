@@ -98,10 +98,11 @@ function SearchVideos() {
                 duration={video?.duration}
                 title={video?.title}
                 views={video?.views}
-                avatar={video?.ownerDetails?.avatar?.url}
-                channelName={video?.ownerDetails?.username}
+                avatar={video?.ownerDetails?.avatar}
+                channelName={video?.ownerDetails?.userName}
                 createdAt={video?.createdAt}
                 videoId={video?._id}
+                isPublished={video.isPublished}
               ></VideoList>
             ))}
         </div>
