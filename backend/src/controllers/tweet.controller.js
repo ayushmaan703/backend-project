@@ -73,12 +73,6 @@ const getUserTweets = asyncHandler(async (req, res) => {
     if (!isValidObjectId(userId)) {
         throw new APIerror(400, "Invalid user id")
     }
-    const user = await Tweets.findOne({
-        owner: userId,
-    })
-    if (!user) {
-        throw new APIerror(404, "User not found")
-    }
     const userTweets = await Tweets.aggregate([
         {
             $match: {

@@ -14,7 +14,6 @@ function History() {
   useEffect(() => {
     dispatch(getWatchHistory());
   }, [dispatch]);
-
   if (loading) {
     return <HomeSkeleton />;
   }
@@ -22,7 +21,6 @@ function History() {
   if (videos?.length == 0) {
     return <NoVideosFound />;
   }
-
   if (videos && videos.length > 0) {
     return (
       <>
@@ -31,14 +29,15 @@ function History() {
             {videos.map((video) => (
               <VideoList
                 key={video._id}
-                avatar={video.owner?.avatar.url}
+                avatar={video.owner?.avatar}
                 duration={video.duration}
                 title={video.title}
                 thumbnail={video.thumbnail?.url}
                 createdAt={video.createdAt}
                 views={video.views}
-                channelName={video.owner.username}
+                channelName={video.owner.userName}
                 videoId={video._id}
+                isPublished={video.isPublished}
               />
             ))}
           </div>

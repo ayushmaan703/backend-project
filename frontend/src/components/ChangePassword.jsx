@@ -16,7 +16,7 @@ function ChangePassword() {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    console.log(data);
+    //  (data);
     dispatch(
       changePassword({
         password: data?.password,

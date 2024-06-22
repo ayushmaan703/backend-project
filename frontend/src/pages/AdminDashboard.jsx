@@ -62,8 +62,9 @@ function AdminDashboard() {
               <EditVideo
                 setEditVideoPopup={setPopUp}
                 title={videoDetails?.title}
-                description={videoDetails?.description}
+                description={videoDetails?.discription}
                 videoId={videoDetails?._id}
+                thumbnail={videoDetails?.thumbnail.url}
               />
             </div>
           )}

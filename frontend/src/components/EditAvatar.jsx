@@ -14,7 +14,7 @@ function EditAvatar({ cover, preImage }) {
   } = useForm();
 
   const upload = (data) => {
-    console.log(data);
+    //  (data);
     setIsOpen(false);
     const formData = new FormData();
     formData.append(`${cover ? "coverImage" : "avatar"}`, data.avatar[0]);

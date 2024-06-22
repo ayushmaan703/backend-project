@@ -45,7 +45,7 @@ function EditVideo({
 
   useEffect(() => {
     setValue("title", title);
-    setValue("description", description);
+    setValue("discription", description);
   }, [title, description, setValue]);
 
   if (uploading) {
@@ -112,12 +112,12 @@ function EditVideo({
                 <textarea
                   rows="4"
                   className="focus:bg-[#222222] text-sm overflow-y-scroll bg-transparent outline-none border w-full mt-1 p-1"
-                  {...register("description", {
+                  {...register("discription", {
                     required: "Description is required",
                   })}
                 ></textarea>
                 <span className="text-red-500 text-xs">
-                  {errors.description?.message}
+                  {errors.discription?.message}
                 </span>
               </div>
               <div className="flex gap-3">
@@ -128,7 +128,7 @@ function EditVideo({
                   Cancel
                 </Button>
                 <Button
-                  className="flex-1 bg-purple-500 p-2 font-bold"
+                  className="flex-1 bg-cyan-500 p-2 font-bold"
                   textColor="text-black"
                   type="submit"
                 >

@@ -36,11 +36,12 @@ function LikedVideos() {
               avatar={video.likedVideo.ownerDetails?.avatar}
               duration={video.likedVideo.duration}
               title={video.likedVideo.title}
-              thumbnail={video.likedVideo.thumbnail}
+              thumbnail={video.likedVideo.thumbnail?.url}
               createdAt={video.likedVideo.createdAt}
               views={video.likedVideo.views}
-              channelName={video.likedVideo.ownerDetails?.username}
+              channelName={video.likedVideo.ownerDetails?.userName}
               videoId={video.likedVideo._id}
+              isPublished={video.likedVideo.isPublished}
             />
           ))}
         </div>

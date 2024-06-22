@@ -77,7 +77,7 @@ const subscriptionSlice = createSlice({
       state.mySubscriptions = action.payload.data.filter(
         (subscription) => subscription?.subscribedChannel
       );
-      // console.log(
+      //  (
       //   action.payload.data.filter(
       //     (subscription) => subscription?.subscribedChannel
       //   )

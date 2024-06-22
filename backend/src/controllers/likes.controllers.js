@@ -131,7 +131,7 @@ const getLikedVideos = asyncHandler(async (req, res) => {
         },
         {
             $project: {
-                // id: 0,//inclusion and exclusion are not possible at the same time
+                // id: 0,//inclusion and exclusion are not possible at the same time but if written at last then its ok 
                 likedVideo: {
                     "videoFile.url": 1,
                     "thumbnail.url": 1,
@@ -142,11 +142,14 @@ const getLikedVideos = asyncHandler(async (req, res) => {
                     duration: 1,
                     createdAt: 1,
                     isPublished: 1,
+                    _id: 1,
                     ownerDetails: {
-                        username: 1,
+                        userName: 1,
                         fullName: 1,
+                        avatar: 1,
                     },
                 },
+                _id: 0,
             },
         },
     ])

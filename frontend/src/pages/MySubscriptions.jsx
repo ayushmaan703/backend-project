@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSubscribedChannels } from "../store/slices/subscriptionSlice";
 import { Link } from "react-router-dom";
-import { VideoList, Avatar } from "../components/index";
+import { VideoList, Avatar, NoSubscriptionsFound } from "../components/index";
 
 function MySubscriptions() {
   const dispatch = useDispatch();
@@ -16,6 +16,9 @@ function MySubscriptions() {
     }
   }, [dispatch, subscriberId]);
   window.scrollTo(0, 0);
+  if (subscriptions.length == 0) {
+    return <NoSubscriptionsFound />;
+  }
   return (
     <>
       <div className="flex gap-3 p-2 text-white items-center bg-[#222222]">

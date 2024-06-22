@@ -16,7 +16,6 @@ export const createAccount = createAsyncThunk("createAccount", async (data) => {
   if (data.coverImage) {
     formData.append("coverImage", data.coverImage[0]);
   }
-  console.log(formData);
   try {
     const response = await axiosInstance.post("/user/register", formData);
     toast.success("Registered Succcessfully");
@@ -61,7 +60,6 @@ export const userRefreshToken = createAsyncThunk(
 export const changePassword = createAsyncThunk(
   "changePassword",
   async (data) => {
-    console.log(data);
     try {
       const response = await axiosInstance.post("/user/change-password", data);
       toast.success("Password changed successfully");
@@ -104,7 +102,6 @@ export const updateUserDetails = createAsyncThunk(
   async (data) => {
     try {
       const response = await axiosInstance.patch("/user/update-details", data);
-      console.log(response.data);
       toast.success("Details updated sucessfully");
       return response.data.data;
     } catch (error) {

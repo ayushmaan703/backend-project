@@ -25,7 +25,6 @@ export const getWatchHistory = createAsyncThunk("getWatchHistory", async () => {
     const response = await axiosInstance.get("/user/history");
     return response.data.data;
   } catch (error) {
-    console.log(error);
     toast.error(error?.response?.data?.message);
     throw error;
   }

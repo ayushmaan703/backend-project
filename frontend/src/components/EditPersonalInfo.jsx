@@ -20,7 +20,7 @@ function EditPersonalInfo() {
   }, [auth, setValue]);
 
   const saveChanges = (data) => {
-    console.log(data);
+    //  (data);
     dispatch(updateUserDetails(data));
   };
 

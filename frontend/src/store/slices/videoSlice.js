@@ -39,10 +39,9 @@ export const getAllVideos = createAsyncThunk(
 export const publishAvideo = createAsyncThunk("publishAvideo", async (data) => {
   const formData = new FormData();
   formData.append("title", data.title);
-  formData.append("description", data.description);
+  formData.append("discription", data.description);
   formData.append("videoFile", data.videoFile[0]);
   formData.append("thumbnail", data.thumbnail[0]);
-
   try {
     const response = await axiosInstance.post("/video/publish-video", formData);
     toast.success(response?.data?.message);
@@ -58,7 +57,7 @@ export const updateAVideo = createAsyncThunk(
   async ({ videoId, data }) => {
     const formData = new FormData();
     formData.append("title", data.title);
-    formData.append("description", data.description);
+    formData.append("discription", data.discription);
     formData.append("thumbnail", data.thumbnail[0]);
 
     try {

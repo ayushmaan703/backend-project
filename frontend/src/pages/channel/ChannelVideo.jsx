@@ -70,13 +70,14 @@ function ChannelVideos() {
         {videos?.map((video) => (
           <VideoList
             key={video._id}
-            avatar={video.avatar?.url}
+            avatar={video.avatar}
             duration={video.duration}
             title={video.title}
             thumbnail={video.thumbnail?.url}
             createdAt={video.createdAt}
             views={video.views}
             videoId={video._id}
+            isPublished={video.isPublished}
           />
         ))}
       </div>

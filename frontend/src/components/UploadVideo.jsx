@@ -20,6 +20,7 @@ function UploadVideo({ setUploadVideoPopup }) {
   const uploaded = useSelector((state) => state.video.uploaded);
 
   const publishVideo = async (data) => {
+    //  (data);
     setVideoSize(Math.floor(data.videoFile[0].size / (1024 * 1024)));
     await dispatch(publishAvideo(data));
   };
@@ -64,7 +65,7 @@ function UploadVideo({ setUploadVideoPopup }) {
               </div>
               <div>
                 <Button
-                  className="bg-purple-500 py-1 px-2 font-bold"
+                  className="bg-cyan-500 py-1 px-2 font-bold"
                   textColor="text-black"
                   type="submit"
                 >
@@ -85,7 +86,7 @@ function UploadVideo({ setUploadVideoPopup }) {
                 </div>
                 <label
                   htmlFor="video-upload"
-                  className="cursor-pointer bg-purple-500 text-black font-bold text-sm py-2 px-4"
+                  className="cursor-pointer bg-cyan-500 text-black font-bold text-sm py-2 px-4"
                 >
                   Select Files
                 </label>

@@ -22,7 +22,7 @@ function SignUp() {
 
   const submit = async (data) => {
     const response =  await dispatch(createAccount(data));
-    console.log(response);
+    //  (response);
     if (response?.payload?.success) {
       const userName = data?.userName;
       const password = data?.password;
