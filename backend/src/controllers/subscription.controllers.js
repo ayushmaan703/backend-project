@@ -167,6 +167,7 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
                         duration: 1,
                         createdAt: 1,
                         views: 1,
+                        isPublished:1
                     },
                 },
             },

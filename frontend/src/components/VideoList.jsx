@@ -11,7 +11,7 @@ function VideoList({
   channelName,
   createdAt,
   videoId,
-  isPublished,
+  isPublished = false,
 }) {
   const navigate = useNavigate();
 
