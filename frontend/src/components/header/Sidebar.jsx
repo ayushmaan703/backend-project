@@ -11,6 +11,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../store/slices/authSlice";
 import { FaThreads } from "react-icons/fa6";
+import Navbar from "./Navbar";
 function Sidebar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,12 +57,13 @@ function Sidebar() {
           </div>
           <div className="flex items-center justify-center sm:justify-start gap-2 hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg">
             <IoFolderOutline size={25} />
-            <span className="text-base hidden sm:block">Collections</span>
+            <NavLink to="/collections">
+              <span className="text-base hidden sm:block">Collections</span>
+            </NavLink>
           </div>
           <div className="flex items-center justify-center sm:justify-start gap-2 hover:bg-[#222222]  cursor-pointer py-1 px-2 border border-[#0E0F0F] rounded-lg">
             <TbUserCheck size={25} />
-            <NavLink
-            to="/subscriptions">
+            <NavLink to="/subscriptions">
               <span className="text-base hidden sm:block">Subscriptions</span>
             </NavLink>
           </div>

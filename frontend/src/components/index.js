@@ -17,8 +17,15 @@ import Video from "./Video";
 import Description from "./Description";
 import Spinner from "./Spinner";
 import InfiniteScroll from "./InfiniteScroll";
-import Avatar from "./Avatar"
-import VideoList from "./VideoList"
+import Avatar from "./Avatar";
+import VideoList from "./VideoList";
+import HeaderSection from "./dashboard/HeaderSection";
+import StatsSection from "./dashboard/StatsSection";
+import VideoTable from "./dashboard/VideoTable";
+import EditVideo from "./EditVideo";
+import UploadVideo from "./UploadVideo";
+import UploadingVideo from "./UploadingVideo";
+import Input2 from "./Input2";
 export {
   Navbar,
   Search,
@@ -40,5 +47,12 @@ export {
   Spinner,
   InfiniteScroll,
   Avatar,
-  VideoList
+  VideoList,
+  HeaderSection,
+  StatsSection,
+  VideoTable,
+  EditVideo,
+  UploadVideo,
+  UploadingVideo,
+  Input2
 };

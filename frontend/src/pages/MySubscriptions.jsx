@@ -16,7 +16,6 @@ function MySubscriptions() {
     }
   }, [dispatch, subscriberId]);
   window.scrollTo(0, 0);
-console.log(subscriptions);
   return (
     <>
       <div className="flex gap-3 p-2 text-white items-center bg-[#222222]">

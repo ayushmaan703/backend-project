@@ -23,6 +23,7 @@ import ChangePassword from "./components/ChangePassword.jsx";
 import SearchVideos from "./pages/SearchVideos.jsx";
 import VideoDetail from "./pages/VideoDetails.jsx";
 import MySubscriptions from "./pages/MySubscriptions.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 function App() {
   const dispatch = useDispatch();
 
@@ -169,6 +170,14 @@ function App() {
           element={
             <AuthLayout authentication>
               <VideoDetail />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/collections"
+          element={
+            <AuthLayout authentication>
+              <AdminDashboard />
             </AuthLayout>
           }
         />
