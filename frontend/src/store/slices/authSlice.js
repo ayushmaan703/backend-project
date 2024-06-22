@@ -90,7 +90,7 @@ export const updateCoverImage = createAsyncThunk(
     try {
       const response = await axiosInstance.post("user/update-coverImage", data);
       toast.success("Cover image updated successfully");
-      return response.data;
+      return response.data.data;
     } catch (error) {
       toast.error(error?.response?.data?.error);
       throw error;

@@ -10,7 +10,7 @@ function ChannelNavigate({ username, edit }) {
             to={`/edit/personalInfo`}
             className={({ isActive }) =>
               isActive
-                ? "bg-white text-cyan-600 border-b-2 border-cyan-600"
+                ? " text-cyan-600 border-b-2 border-cyan-600"
                 : ""
             }
           >
@@ -20,7 +20,7 @@ function ChannelNavigate({ username, edit }) {
             to={`/edit/password`}
             className={({ isActive }) =>
               isActive
-                ? "bg-white text-cyan-600 border-b-2 border-cyan-600"
+                ? " text-cyan-600 border-b-2 border-cyan-600"
                 : ""
             }
           >
