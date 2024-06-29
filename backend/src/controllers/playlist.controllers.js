@@ -47,6 +47,9 @@ const getUserPlaylists = asyncHandler(async (req, res) => {
                 totalVideos: {
                     $size: "$videosInPlaylist",
                 },
+                thumbnail: {
+                    $first: "$videosInPlaylist.thumbnail.url",
+                },
             },
         },
         {
@@ -56,6 +59,7 @@ const getUserPlaylists = asyncHandler(async (req, res) => {
                 totalVideos: 1,
                 updatedAt: 1,
                 createdAt: 1,
+                thumbnail: 1,
             },
         },
     ])
@@ -88,13 +92,26 @@ const getPlaylistById = asyncHandler(async (req, res) => {
                 localField: "videos",
                 foreignField: "_id",
                 as: "playlistVideo",
+                pipeline: [
+                    {
+                        $lookup: {
+                            from: "users",
+                            localField: "owner",
+                            foreignField: "_id",
+                            as: "videoOwnerDetails",
+                        },
+                    },
+                    {
+                        $unwind: "$videoOwnerDetails",
+                    },
+                ],
             },
         },
-        {
-            $match: {
-                "playlistVideo.isPublished": true,
-            },
-        },
+        // {
+        //     $match: {
+        //         "videos.isPublished": true,
+        //     },
+        // },
         {
             $lookup: {
                 from: "users",
@@ -128,9 +145,15 @@ const getPlaylistById = asyncHandler(async (req, res) => {
                     duration: 1,
                     createdAt: 1,
                     views: 1,
+                    _id: 1,
+                    isPublished: 1,
+                    videoOwnerDetails: {
+                        fullName: 1,
+                        userName: 1,
+                        avatar: 1,
+                    },
                 },
                 owner: {
-                    fullName: 1,
                     userName: 1,
                 },
             },
@@ -163,11 +186,8 @@ const addVideoToPlaylist = asyncHandler(async (req, res) => {
     if (!playlist) {
         throw new APIerror(400, "Playlist not found")
     }
-    if (
-        (playlist.owner?.toString() && video.owner.toString()) !==
-        req.user._conditions._id.toString()
-    ) {
-        throw new APIresponse(400, "only owner can add video to thier playlist")
+    if (playlist.owner?.toString() !== req.user._conditions._id.toString()) {
+        throw new APIerror(400, "only owner can add video to thier playlist")
     }
     const addingVideo = await Playlist.findByIdAndUpdate(
         playlistId,

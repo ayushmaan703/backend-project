@@ -24,6 +24,7 @@ import SearchVideos from "./pages/SearchVideos.jsx";
 import VideoDetail from "./pages/VideoDetails.jsx";
 import MySubscriptions from "./pages/MySubscriptions.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
+import Playlist from "./pages/Playlist.jsx";
 function App() {
   const dispatch = useDispatch();
 
@@ -91,6 +92,14 @@ function App() {
               }
             />
           </Route>
+          <Route
+              path="playlist/:playlistId"
+              element={
+                <AuthLayout authentication>
+                  <Playlist />
+                </AuthLayout>
+              }
+            />
           <Route
             path="/liked-videos"
             element={

@@ -27,6 +27,7 @@ import UploadVideo from "./UploadVideo";
 import UploadingVideo from "./UploadingVideo";
 import Input2 from "./Input2";
 import NoSubscriptionsFound from "./NoSubscriptionsFound";
+import AddVideoToPlaylist from "./AddVideoToPlaylist";
 export {
   Navbar,
   Search,
@@ -57,4 +58,5 @@ export {
   UploadingVideo,
   Input2,
   NoSubscriptionsFound,
+  AddVideoToPlaylist,
 };

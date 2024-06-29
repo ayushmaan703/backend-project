@@ -109,19 +109,18 @@ function ChannelPlaylist() {
             >
               <div className="absolute flex justify-between bottom-0 left-0 border-t py-1 px-2 w-full backdrop-contrast-75">
                 <div className="flex flex-col gap-1">
-                  <h1 className="text-lg">Playlist</h1>
+                  <h1 className="text-lg">{playlists[0].playlistName}</h1>
                   <div className="text-xs text-slate-300">
-                    {playlist.totalViews} Views &nbsp;
                     {timeAgo(playlist.updatedAt)}
                   </div>
                 </div>
                 <p>{playlist.totalVideos} Videos</p>
               </div>
-              <div className=" py-1 px-2">
-                <p className="text-sm font-bold">{playlist.name}</p>
-                <p className="text-xs w-full h-4 overflow-hidden">
-                  {playlist.description}
-                </p>
+              <div >
+                <img
+                  src={playlist.thumbnail}
+                  className="object-cover w-full h-60"
+                />
               </div>
             </Link>
           ))}
@@ -131,4 +130,4 @@ function ChannelPlaylist() {
   );
 }
 
-export default ChannelPlaylist
+export default ChannelPlaylist;

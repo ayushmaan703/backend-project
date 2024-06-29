@@ -92,12 +92,12 @@ const getVideoComments = asyncHandler(async (req, res) => {
 
 const addComment = asyncHandler(async (req, res) => {
     const { videoId } = req.params
-    const { commentContent } = req.body
-    if (!commentContent) {
+    const { content } = req.body
+    if (!content) {
         throw new APIerror(400, "Comment is required")
     }
     const comment = await Comments.create({
-        content: commentContent,
+        content: content,
         videos: videoId,
         owner: req.user._conditions._id,
     })

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { timeAgo } from "../helper/timeAgo";
-import { Like, Button } from "./index";
-import { useDispatch } from "react-redux";
+import { Like, Button, AddVideoToPlaylist } from "./index";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toggleSubscription } from "../store/slices/subscriptionSlice";
+import { HiOutlineDotsVertical } from "./Icons";
 
 function Description({
   title,
@@ -19,7 +20,9 @@ function Description({
   videoId,
   channelId,
 }) {
+
   const [localIsSubscribed, setLocalIsSubscribed] = useState(isSubscribed);
+  const [addToPlaylist, setAddToPlaylist] = useState(false);
   const [localSubscribersCount, setLocalSubscribersCount] =
     useState(subscribersCount);
   const dispatch = useDispatch();
@@ -33,7 +36,6 @@ function Description({
       setLocalSubscribersCount((prev) => prev + 1);
     }
   };
-
   const handleSubsribe = () => {};
   return (
     <>
@@ -56,7 +58,13 @@ function Description({
                   size={25}
                 />
               </div>
+              <div>
+                <HiOutlineDotsVertical
+                  onClick={() => setAddToPlaylist((prevState) => !prevState)}
+                />
+              </div>
             </div>
+            {addToPlaylist && <AddVideoToPlaylist />}
             <div className="flex gap-2 justify-between items-center">
               <Link
                 to={`/channel/${channelName}/videos`}

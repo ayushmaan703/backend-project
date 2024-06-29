@@ -15,9 +15,8 @@ function CommentsList({
   likesCount,
 }) {
   const avatar2 = useSelector((state) => state.auth?.userData?.avatar.url);
-  const authUsername = useSelector((state) => state.auth?.userData?.username);
+  const authUsername = useSelector((state) => state.auth?.userData?.userName);
   const dispatch = useDispatch();
-
   const [editState, setEditState] = useState({
     editing: false,
     editedContent: content,

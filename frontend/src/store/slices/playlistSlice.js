@@ -59,7 +59,7 @@ export const getPlaylistById = createAsyncThunk(
   async (playlistId) => {
     try {
       const response = await axiosInstance.get(`/playlist/g/${playlistId}`);
-      return response.data;
+      return response.data.data;
     } catch (error) {
       toast.error(error?.response?.data?.message);
       throw error;
@@ -100,10 +100,10 @@ export const deletePlaylist = createAsyncThunk(
 );
 export const updatePlaylist = createAsyncThunk(
   "updatePlaylist",
-  async ({ newName, description, playlistId }) => {
+  async ({ name, description, playlistId }) => {
     try {
       const response = await axiosInstance.patch(`/playlist/u/${playlistId}`, {
-        newName,
+        name,
         description,
       });
       if (response.data.success) {
@@ -123,6 +123,13 @@ const playlistSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUserPlaylists.fulfilled, (state, action) => {
       state.playlists = action.payload;
+    });
+    builder.addCase(getPlaylistById.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getPlaylistById.fulfilled, (state, action) => {
+      state.loading = false;
+      state.playlist = action.payload;
     });
   },
 });

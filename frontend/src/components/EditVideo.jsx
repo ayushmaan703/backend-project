@@ -64,7 +64,7 @@ function EditVideo({
       <div className="fixed mt-5 top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-70 z-50">
         <form
           onSubmit={handleSubmit(updateVideo)}
-          className=" bg-black space-y-2 border h-[30rem] overflow-y-scroll outline-none p-2"
+          className=" bg-black space-y-2 border h-[30rem] overflow-y outline-none p-2"
         >
           <div className="sticky left-0 top-0 z-50 bg-[#222222] flex justify-between items-center border-b border-slate-500 px-3 py-1">
             <div>
@@ -111,7 +111,7 @@ function EditVideo({
                 <label>Description *</label>
                 <textarea
                   rows="4"
-                  className="focus:bg-[#222222] text-sm overflow-y-scroll bg-transparent outline-none border w-full mt-1 p-1"
+                  className="focus:bg-[#222222] text-sm overflow-y bg-transparent outline-none border w-full mt-1 p-1"
                   {...register("discription", {
                     required: "Description is required",
                   })}
