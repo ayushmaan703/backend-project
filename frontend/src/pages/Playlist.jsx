@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Container from "../components/Container";
-import NoVideosFound from "../components/NoVideoFound";
 import VideoList from "../components/VideoList";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,7 +8,7 @@ import {
   updatePlaylist,
 } from "../store/slices/playlistSlice";
 import HomeSkeleton from "../skeleton/HomeSkeleton";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";

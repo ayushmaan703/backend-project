@@ -23,7 +23,18 @@ function AddVideoToPlaylist() {
     };
     get();
   }, [videoId]);
-
+  if (userPlaylist?.length == 0) {
+    return (
+      <>
+        {" "}
+        <div className="border bg-[#222222] text-lg border-slate-600 absolute text-center right-20 rounded-md">
+          <ul>
+            <li className="hover:bg-slate-700 rounded-md px-10 py-0.5 cursor-pointer  ">No playlist found</li>
+          </ul>
+        </div>
+      </>
+    );
+  }
   return (
     <>
       <div className="border bg-[#222222] text-lg border-slate-600 absolute text-center right-20 rounded-md">
