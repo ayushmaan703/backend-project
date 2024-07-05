@@ -4,7 +4,7 @@ import { getAllVideos, makeVideosNull } from "../store/slices/videoSlice";
 import InfiniteScroll from "../components/InfiniteScroll";
 import Container from "../components/Container";
 import VideoList from "../components/VideoList";
-import HomeSkeleton from "../skeleton/HomeSkeleton";
+import HomeSkeleton from "../skeleton/HomeSkeleton.jsx";
 
 function HomePage() {
   const dispatch = useDispatch();
