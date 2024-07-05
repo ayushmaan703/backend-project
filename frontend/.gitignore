@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 .vercel
+# dotenv environment variables file
+.env
+.env.test
+.env.production
