@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { currentUserInfo, userLogin } from "../../store/slices/authSlice.js";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import LoginSkeleton from "../../skeleton/LoginSkeleton.jsx";
+// import LoginSkeleton from "../../skeleton/LoginSkeleton.jsx";
 
 function Login() {
   const {
@@ -30,9 +30,9 @@ function Login() {
     }
   };
 
-  if (loading) {
-    return <LoginSkeleton />;
-  }
+  // if (loading) {
+  //   return <LoginSkeleton />;
+  // }
 
   return (
     <>
