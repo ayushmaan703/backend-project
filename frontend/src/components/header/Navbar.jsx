@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoMdLogOut } from "react-icons/io";
 import { userLogout } from "../../store/slices/authSlice";
 import SearchForSmallScreen from "../SearchForSmallScreen";
+import { FaThreads } from "react-icons/fa6";
 function Navbar() {
   const dispatch = useDispatch();
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -113,7 +114,7 @@ function Navbar() {
                   </NavLink>
                 </div>
                 <div className="flex items-center border border-slate-500 gap-5 px-3 py-1 hover:bg-[#222222] rounded-lg">
-                  <MdOutlineContactSupport size={25} />
+                  <FaThreads size={25} />
                   <NavLink to="/tweets">
                     <span className="text-lg">Tweets</span>
                   </NavLink>
