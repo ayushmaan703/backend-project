@@ -112,6 +112,12 @@ function Navbar() {
                     <span className="text-lg">My Content</span>
                   </NavLink>
                 </div>
+                <div className="flex items-center border border-slate-500 gap-5 px-3 py-1 hover:bg-[#222222] rounded-lg">
+                  <MdOutlineContactSupport size={25} />
+                  <NavLink to="/tweets">
+                    <span className="text-lg">Tweets</span>
+                  </NavLink>
+                </div>
                 {/* <div className="flex items-center border border-slate-500 gap-5 px-3 py-1 hover:bg-[#222222] rounded-lg">
                   <MdOutlineContactSupport size={25} />
                   <span className="text-lg">Support</span>
